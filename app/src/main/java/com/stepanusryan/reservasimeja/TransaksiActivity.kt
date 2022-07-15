@@ -98,17 +98,54 @@ class TransaksiActivity : AppCompatActivity() {
                 }
                 else ->{
                     sendTransaksi(idPesanan,nomor,harga,tanggals,nama,telepon,jumlah,keperluan)
-                    startActivity(Intent(this@TransaksiActivity,UiActivity::class.java))
-                    showNotifTransaksiBerhasil(nomor)
-                    Toast.makeText(this@TransaksiActivity,"Anda berhasil reservasi meja nomor $nomor",Toast.LENGTH_SHORT).show()
-                    finish()
                 }
             }
         }
     }
     private fun sendTransaksi(idPesan:String,idMeja:String,harga:String,tanggal:String,nama:String,telepon:String,jumlah:String,keperluan:String){
         pesanan = Pesanan(idPesan,idMeja,harga,tanggal,nama,telepon,jumlah, keperluan)
-        databaseReference.child(idPesan).setValue(pesanan)
+        checkTransaksi(tanggal,idMeja)
+    }
+    private fun checkTransaksi(tanggal: String,nomor: String){
+        databaseReference.orderByChild("nomorMeja").equalTo(nomor).addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    databaseReference.orderByChild("tanggal").equalTo(tanggal).addListenerForSingleValueEvent(object :ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()){
+                                binding?.datePicker?.text = ""
+                                tanggals = ""
+                                Toast.makeText(this@TransaksiActivity,"Tanggal untuk meja $nomor sudah ada yang memesan",Toast.LENGTH_SHORT).show()
+                            }
+                            else{
+                                databaseReference.child(idPesanan).setValue(pesanan)
+                                startActivity(Intent(this@TransaksiActivity,UiActivity::class.java))
+                                showNotifTransaksiBerhasil(nomor)
+                                binding?.datePicker?.text = ""
+                                tanggals = ""
+                                Toast.makeText(this@TransaksiActivity,"Anda berhasil reservasi meja nomor $nomor di tanggal $tanggal",Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            Toast.makeText(this@TransaksiActivity,error.message,Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+                else{
+                    databaseReference.child(idPesanan).setValue(pesanan)
+                    startActivity(Intent(this@TransaksiActivity,UiActivity::class.java))
+                    showNotifTransaksiBerhasil(nomor)
+                    binding?.datePicker?.text = ""
+                    tanggals = ""
+                    Toast.makeText(this@TransaksiActivity,"Anda berhasil reservasi meja nomor $nomor di tanggal $tanggal",Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@TransaksiActivity,error.message,Toast.LENGTH_SHORT).show()
+            }
+        })
     }
     private fun showNotifTransaksiBerhasil(nomors: String?)
     {
