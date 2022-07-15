@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "439822219215",
+    "project_id": "reservasimeja-f35f8",
+    "storage_bucket": "reservasimeja-f35f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439822219215:android:31ffb5343b5bf1234204ba",
+        "android_client_info": {
+          "package_name": "com.stepanusryan.reservasimeja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439822219215-ipmj25mfb3e104q7e176f0j52v1ss12p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1T3EvXwuN6y3jVlZxhe_FjjqXI5rACIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439822219215-ipmj25mfb3e104q7e176f0j52v1ss12p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Reservasi Meja</string>
+    <string name="title_activity_home">Home Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_pesanan_saya">Pesanan Saya</string>
+    <string name="nomor_meja">Nomor Meja</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="nama_pemesan">Nama Pemesan</string>
+    <string name="jumlah_orang">Jumlah Orang</string>
+    <string name="nomor_telepon">Nomor Telepon</string>
+    <string name="harga">Harga</string>
+    <string name="keperluan">Keperluan</string>
+    <string name="batalkan_pesanan">Batalkan Pesanan</string>
+    <string name="logo_app">Logo App</string>
+    <string name="kirim">Kirim</string>
+    <string name="ini_meja_1">Ini Meja 1</string>
+    <string name="tersedia">Tersedia</string>
+</resources>
